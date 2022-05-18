@@ -4,6 +4,8 @@ import { Button, Form, Spinner } from 'react-bootstrap';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import swal from 'sweetalert';
+import SocialLogin from './SocialLogin';
+import { useLocation, useNavigate } from 'react-router-dom';
 const Register = () => {
     const [
         createUserWithEmailAndPassword,
@@ -18,11 +20,15 @@ const Register = () => {
         createUserWithEmailAndPassword(email, password)
         console.log(email, password);
     }
+    const location=useLocation()
+    let from = location.state?.from?.pathname || "/";
+    const navigate=useNavigate()
     useEffect(() => {
         if (user) {
             swal("Register","Register successful","success");
+            navigate(from, { replace: true });
         }
-    }, [user])
+    }, [user,from,navigate])
     if (loading) {
         return <Spinner animation="border" />
     }
@@ -36,12 +42,12 @@ const Register = () => {
 
                     <Form.Group className="mb-3 " controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
-                        <Form.Control name="email" type="email" placeholder="Enter email" />
+                        <Form.Control required name="email" type="email" placeholder="Enter email" />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control name="password" type="password" placeholder="Password" />
+                        <Form.Control required name="password" type="password" placeholder="Password" />
                     </Form.Group>
 
                     <Button variant="primary" type="submit">
@@ -49,8 +55,7 @@ const Register = () => {
                     </Button>
                 </Form>
             </div>
-            <p>Or</p>
-            <button className="btn btn-warning">Continue with google</button>
+           <SocialLogin></SocialLogin>
 
         </div>
     );
