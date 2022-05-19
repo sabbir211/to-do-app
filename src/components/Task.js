@@ -4,7 +4,7 @@ import swal from 'sweetalert';
 const Task = ({ task ,setAdded}) => {
     const { taskName, description, _id,completed } = task
     const handleComplete = () => {
-        fetch(`http://localhost:5000/usersToDo/${_id}`, {
+        fetch(`https://to-do-sabbir.herokuapp.com/usersToDo/${_id}`, {
             method: "put",
             headers: {
                 "content-type": "application/json"
@@ -19,7 +19,7 @@ const Task = ({ task ,setAdded}) => {
 
     }
     const handleDelete=()=>{
-        fetch(`http://localhost:5000/usersToDo/${_id}`,{
+        fetch(`https://to-do-sabbir.herokuapp.com/usersToDo/${_id}`,{
             method:"delete"
         })
         .then(res=>res.json())

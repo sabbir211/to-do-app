@@ -17,7 +17,7 @@ const AddToDo = () => {
         const description = event.target.description.value
         console.log(taskName, description);
         const completed=false
-        fetch("http://localhost:5000/usersToDo", {
+        fetch("https://to-do-sabbir.herokuapp.com/usersToDo", {
             method: "post",
             headers: {
                 "content-type": "application/json"
@@ -39,7 +39,7 @@ const AddToDo = () => {
     }
     useEffect(()=>{
         const getTask = () => {
-            fetch(`http://localhost:5000/usersToDo?email=${email}`)
+            fetch(`https://to-do-sabbir.herokuapp.com/usersToDo?email=${email}`)
             .then(res => res.json())
             .then(data => {
                 console.log(data);
