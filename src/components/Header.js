@@ -16,13 +16,16 @@ const Header = () => {
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="ms-auto">
                             {
-                                user ? <button
+                                user ?<>
+                                <Nav.Link as={Link} to="/">Home </Nav.Link>
+                                 <button
                                     onClick={async () => {
                                         await signOut(auth)
                                         swal("log out ", "Log out successFul", "success")
                                     }}
                                     className='btn btn-link'
-                                >Signout </button> : <>
+                                >Signout </button>
+                                </> : <>
                                     <Nav.Link as={Link} to="/login">Login </Nav.Link>
                                     <Nav.Link as={Link} to="/register">Register</Nav.Link></>
 
